@@ -1,6 +1,6 @@
 # 💌 Valentine Proposal Web App
 
-[![Live Demo](https://img.shields.io/badge/demo-online-green?style=for-the-badge&logo=vercel)](https://valentine-iota-woad.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/demo-online-green?style=for-the-badge&logo=github)](https://bisug.github.io/valentine)
 [![GitHub license](https://img.shields.io/github/license/bisug/valentine?style=for-the-badge)](LICENSE)
 [![Deploy with Vercel](https://img.shields.io/badge/deploy%20with-Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbisug%2Fvalentine)
 [![Deploy to Netlify](https://img.shields.io/badge/deploy%20to-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://app.netlify.com/start/deploy?repository=https://github.com/bisug/valentine)
@@ -56,7 +56,7 @@ _This project was assisted by Google’s Antigravity and Gemini 3.0 Flash._
 ## 🎮 Live Demo
 
 Experience the magic right now:  
-👉 **[valentine-iota-woad.vercel.app](https://valentine-iota-woad.vercel.app/)**
+👉 **[bisug.github.io/valentine](https://bisug.github.io/valentine)**
 
 ---
 
