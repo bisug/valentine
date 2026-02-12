@@ -402,16 +402,8 @@ p {
   white-space: nowrap;
 }
 
-.envelope-wrapper.open::after {
-  content: "Click anywhere to close ❤️";
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--deep-red);
-  z-index: 2100;
-  font-size: 1.1rem;
-}
+/* Close hint removed as per request */
+
 
 .envelope-wrapper.open .letter-content {
   opacity: 1;
