@@ -21,9 +21,14 @@ body {
   background: linear-gradient(135deg, #fff0f3 0%, #ffb3c1 100%);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -45,16 +50,16 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
-  padding: 3rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
   text-align: center;
   box-shadow: var(--shadow);
-  max-width: 500px;
-  width: 90%;
+  max-width: min(500px, 95vw);
+  width: 100%;
   z-index: 1;
-  animation: fadeIn 1s ease-out;
+  animation: containerFadeIn 0.5s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes containerFadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -68,15 +73,15 @@ body {
 h1 {
   font-family: "Dancing Script", cursive;
   color: var(--deep-red);
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 p {
   color: #4a4a4a;
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   line-height: 1.6;
 }
 
@@ -95,7 +100,7 @@ p {
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,13 +130,15 @@ p {
 
 .success-area {
   display: none;
+  overflow: visible;
+  padding-bottom: 3rem;
 }
 
 #success-msg {
   font-family: "Dancing Script", cursive;
   color: var(--deep-red);
-  font-size: 3rem;
-  margin-top: 1rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-top: 0.5rem;
 }
 
 .floating-heart {
@@ -170,4 +177,320 @@ p {
 #name-input:focus {
   border-color: var(--primary-pink);
   background: white;
+}
+
+
+.envelope-wrapper {
+  margin: 0 auto;
+  width: 220px;
+  height: 150px;
+  position: relative;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+
+
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffccd5 0%, #ffb3c1 100%);
+  position: relative;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 15px 35px rgba(193, 25, 68, 0.15);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wax-seal {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px;
+  height: 45px;
+  background: #c9184a;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  border: 2px solid #a4133c;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.envelope-wrapper.open .wax-seal {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px) scale(0.5);
+  pointer-events: none;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-top: 100px solid #ff4d6d;
+  transform-origin: top;
+  transition: transform 0.3s ease-in-out;
+  z-index: 3;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+}
+
+.pocket {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(to top, #ff758f 0%, #ff85a1 100%);
+  border-radius: 0 0 15px 15px;
+  z-index: 2;
+  box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.letter {
+  position: absolute;
+  bottom: 0px;
+  left: 5%;
+  width: 90%;
+  height: 100%;
+  background: #fff;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid #ffccd5;
+  display: flex;
+  flex-direction: column;
+}
+
+.heart-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.letter-content {
+  opacity: 0;
+  transition: opacity 0.4s ease 0.3s;
+  pointer-events: none;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 5px;
+  position: relative;
+}
+
+
+.letter-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+  background: #ffccd5;
+  border-radius: 10px;
+}
+
+.letter-content h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: var(--deep-red);
+  line-height: 1.2;
+}
+
+.letter-content p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: #4a4a4a;
+  letter-spacing: 0.1px;
+}
+
+.letter-content .signature {
+  text-align: right;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin-top: auto;
+  padding-top: 1rem;
+  color: var(--deep-red);
+}
+
+
+.envelope-wrapper.open .flap {
+  transform: perspective(1200px) rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope-wrapper.open .letter {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw;
+  max-width: 420px;
+  height: auto;
+  min-height: min(350px, 80vh);
+  max-height: 90vh;
+  z-index: 2000;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border-radius: 2px 35px 5px 45px;
+  background: linear-gradient(135deg, #fdfcf0 0%, #f1ecd9 100%);
+  border: 1px solid #e2d9c0;
+  background-image: 
+    repeating-linear-gradient(rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 30px),
+    linear-gradient(135deg, #fdfcf0 0%, #f1ecd9 100%);
+  animation: paperPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes paperPop {
+  0% {
+    top: 85%;
+    transform: translate(-50%, 0) scale(0.9);
+    opacity: 0;
+  }
+  40% {
+    top: 45%;
+    transform: translate(-50%, 0) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.envelope-wrapper::after {
+  content: "Click to Open 💌";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: var(--deep-red);
+  font-family: "Dancing Script", cursive;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.envelope-wrapper.open::after {
+  content: "Click anywhere to close ❤️";
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--deep-red);
+  z-index: 2100;
+  font-size: 1.1rem;
+}
+
+.envelope-wrapper.open .letter-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 500px) {
+  .envelope-wrapper.open .letter {
+    width: 95vw;
+    padding: 1.5rem;
+  }
+  
+  h1 { margin-bottom: 0.8rem; }
+}
+
+@media (max-height: 600px) {
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+  p { font-size: 1rem; margin-bottom: 0.8rem; }
+  .container { padding: 1.2rem; }
+  .envelope-wrapper { transform: scale(0.8); margin: 0.5rem auto; }
+  .letter-content h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  body { 
+    flex-direction: row; 
+    padding: 1rem; 
+    gap: 2rem;
+    overflow-y: auto; 
+  }
+  .envelope-wrapper { transform: scale(0.7); }
+  .envelope-wrapper.open .letter {
+    top: 50%;
+    max-height: 95vh;
+    min-height: auto;
+    width: 70vw;
+  }
+}
+
+
+
+
+
+.heart-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  font-size: 24px;
+  animation: heartExplode 1.2s cubic-bezier(0.15, 0, 0.2, 1) forwards;
+}
+
+@keyframes heartExplode {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  15% {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0) rotate(var(--tr));
+    opacity: 0;
+  }
+}
+
+
+.success-area h1 {
+  animation: slideDown 0.4s ease-out;
+}
+
+.success-area p {
+  animation: slideDown 0.4s ease-out 0.1s both;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
